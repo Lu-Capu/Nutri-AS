@@ -46,9 +46,12 @@ class App:
         self.page.window.min_width = 1000
         self.page.window.min_height = 640
 
-        icon_path = Path(__file__).resolve().parent.parent / "assets" / "icon.ico"
-        if icon_path.exists():
-            self.page.window.icon = str(icon_path)
+        assets_dir = Path(__file__).resolve().parent.parent / "assets"
+        for icon_name in ("icon.ico", "icon.png", "icon"):
+            icon_path = assets_dir / icon_name
+            if icon_path.exists():
+                self.page.window.icon = str(icon_path)
+                break
 
         menu_control = self.menu.build()
         self.contenido.content = self._vista_dashboard()
