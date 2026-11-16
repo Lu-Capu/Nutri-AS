@@ -1,0 +1,14 @@
+[project]
+name = "nutri-as"
+version = "0.1.0"
+description = "Nutri-AS - Software de Nutrición"
+
+[tool.flet]
+org = "com.nutrias"
+product = "Nutri-AS"
+company = "Nutri-AS"
+copyright = "Copyright (C) 2026 Nutri-AS"
+
+[tool.flet.app]
+path = "src"
+module = "main"
