@@ -41,17 +41,24 @@ class App:
             color_scheme_seed=COLOR_ACENTO,
             use_material3=True,
         )
-        self.page.window.width = 1280
-        self.page.window.height = 780
-        self.page.window.min_width = 1000
-        self.page.window.min_height = 640
 
-        assets_dir = Path(__file__).resolve().parent.parent / "assets"
-        for icon_name in ("icon.ico", "icon.png", "icon"):
-            icon_path = assets_dir / icon_name
-            if icon_path.exists():
-                self.page.window.icon = str(icon_path)
-                break
+        # Configuración de ventana solo en escritorio (no disponible igual en móvil/web)
+        window = getattr(self.page, "window", None)
+        if window is not None:
+            try:
+                window.width = 1280
+                window.height = 780
+                window.min_width = 1000
+                window.min_height = 640
+
+                assets_dir = Path(__file__).resolve().parent.parent / "assets"
+                for icon_name in ("icon.ico", "icon.png", "icon"):
+                    icon_path = assets_dir / icon_name
+                    if icon_path.exists():
+                        window.icon = str(icon_path)
+                        break
+            except Exception:
+                pass
 
         menu_control = self.menu.build()
         self.contenido.content = self._vista_dashboard()
